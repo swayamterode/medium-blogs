@@ -12,11 +12,15 @@ npx wrangler whoami
 npm run deploy
 ```
 
-## Updating the Commons NPM Package
+## NPM package 
+
+You can access it here: [@swayamterode/medium-blog-common](https://www.npmjs.com/package/@swayamterode/medium-blog-common?activeTab=readme)
+
+### Updating the Commons NPM Package
 
 To update the Commons NPM package, follow these steps:
 
--Update the **version** in the `package.json` file.
+- Update the **version** in the `package.json` file.
 
 - Build the package using TypeScript compiler:
 
