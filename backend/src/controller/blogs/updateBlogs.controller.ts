@@ -10,10 +10,13 @@ export const updateBlog = async (c: Context) => {
 
   try {
     const body = await c.req.json();
-    const { success } = updateBlogInput.safeParse(body);
-    if (!success) {
+    const response = updateBlogInput.safeParse(body);
+    if (!response.success) {
       c.status(403);
-      return c.json({ success: false, error: "Invalid input" });
+      return c.json({
+        success: false,
+        error: response.error.issues[0].message,
+      });
     }
     const blogUpdate = await prisma.post.update({
       where: {

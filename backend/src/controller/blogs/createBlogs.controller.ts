@@ -10,10 +10,13 @@ export const createBlog = async (c: Context) => {
   }).$extends(withAccelerate());
   const body = await c.req.json();
 
-  const { success } = createBlogInput.safeParse(body);
-  if (!success) {
+  const response = createBlogInput.safeParse(body);
+  if (!response.success) {
     c.status(403);
-    return c.json({ success: false, error: "Invalid input" });
+    return c.json({
+      success: false,
+      error: response.error.issues[0].message,
+    });
   }
   try {
     const blog = await prisma.post.create({
