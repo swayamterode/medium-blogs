@@ -1,6 +1,6 @@
 {
   "name": "@swayamterode/medium-blog-common",
-  "version": "1.1.3",
+  "version": "1.1.6",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,7 +12,7 @@
   ],
   "author": "Swayam Terode",
   "license": "ISC",
-  "description": "A simple Zod schema for common types",
+  "description": "A simple Zod schema for common types used in the medium blog",
   "dependencies": {
     "zod": "^3.23.8"
   }

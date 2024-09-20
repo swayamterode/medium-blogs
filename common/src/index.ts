@@ -46,9 +46,7 @@ export type SignupInput = z.infer<typeof signupInput>;
  */
 export const signinInput = z.object({
   email: z.string().email(),
-  password: z
-    .string()
-    .min(6, { message: "Password must be at least 6 characters long" }),
+  password: z.string(),
 });
 
 export type SigninInput = z.infer<typeof signinInput>;
