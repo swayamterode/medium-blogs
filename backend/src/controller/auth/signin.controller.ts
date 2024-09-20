@@ -9,12 +9,12 @@ export const signinController = async (c: Context) => {
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
   const body = await c.req.json(); // { email: string, password: string }
-  const { success } = signinInput.safeParse(body);
-  if (!success) {
+  const response = signinInput.safeParse(body);
+  if (!response.success) {
     c.status(403);
     return c.json({
       success: false,
-      error: "Invalid input provided",
+      error: response.error.issues[0].message,
     });
   }
   try {

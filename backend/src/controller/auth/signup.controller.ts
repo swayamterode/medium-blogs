@@ -16,13 +16,12 @@ export const signupController = async (c: Context) => {
   }).$extends(withAccelerate());
 
   const body = await c.req.json();
-  const { success } = signupInput.safeParse(body);
-  console.log(success);
-  if (!success) {
+  const response = signupInput.safeParse(body);
+  if (!response.success) {
     c.status(403);
     return c.json({
       success: false,
-      error: "Invalid input provided",
+      error: response.error.issues[0].message,
     });
   }
   try {
