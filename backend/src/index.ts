@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-
+import { cors } from "hono/cors";
 // App Initialization
 const app = new Hono<{
   Bindings: {
@@ -7,6 +7,9 @@ const app = new Hono<{
     JWT_SECRET: string;
   };
 }>();
+
+// CORS Config
+app.use("/*", cors());
 
 // Routes Import
 import { userRouter } from "./routes/user";
