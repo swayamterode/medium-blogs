@@ -10,6 +10,7 @@ new Hono<{
     JWT_SECRET: string;
   };
 }>();
+
 export const signupController = async (c: Context) => {
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
@@ -24,7 +25,21 @@ export const signupController = async (c: Context) => {
       error: response.error.issues[0].message,
     });
   }
+
   try {
+    // Check if the email already exists
+    const existingUser = await prisma.user.findUnique({
+      where: { email: body.email },
+    });
+
+    if (existingUser) {
+      c.status(409); // Conflict
+      return c.json({
+        success: false,
+        message: "Email already in use",
+      });
+    }
+
     const user = await prisma.user.create({
       data: {
         email: body.email,
@@ -32,11 +47,12 @@ export const signupController = async (c: Context) => {
         name: body.name,
       },
     });
+
     const jwt = await sign({ id: user.id }, c.env.JWT_SECRET);
     return c.json({
       success: true,
       jwtToken: jwt,
-      message: "user created successfully",
+      message: "User created successfully",
     });
   } catch (error) {
     c.status(403);
