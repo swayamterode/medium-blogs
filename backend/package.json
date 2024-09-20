@@ -7,7 +7,7 @@
   "dependencies": {
     "@prisma/client": "^5.19.1",
     "@prisma/extension-accelerate": "^1.1.0",
-    "@swayamterode/medium-blog-common": "^1.0.0",
+    "@swayamterode/medium-blog-common": "^1.1.5",
     "hono": "^4.6.1",
     "prisma": "^5.19.1"
   },
