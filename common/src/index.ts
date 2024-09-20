@@ -12,13 +12,15 @@ import { z } from "zod";
  * @type {ZodObject}
  */
 export const signupInput = z.object({
-  email: z.string().email(),
+  email: z.string().regex(/^[a-z0-9._%+-]+@(gmail\.com|yahoo\.com)$/, {
+    message:
+      "Email must be lowercase and must be either @gmail.com or @yahoo.com",
+  }),
   password: z
     .string()
     .min(6, { message: "Password must be at least 6 characters long" }),
   name: z.string().optional(),
 });
-
 export type SignupInput = z.infer<typeof signupInput>;
 
 /**
