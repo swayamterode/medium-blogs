@@ -14,6 +14,7 @@ export const getBulkBlogs = async (c: Context) => {
         content: true,
         author: {
           select: {
+            id: true,
             name: true,
             email: true,
           },
