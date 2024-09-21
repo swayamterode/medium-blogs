@@ -54,6 +54,9 @@ export const signinController = async (c: Context) => {
       success: true,
       jwtToken: jwt,
       message: "User signed in successfully",
+      userId: user.id,
+      name: user.name,
+      email: user.email,
     });
   } catch (error) {
     // If an error occurs, return a 403 status with the error message

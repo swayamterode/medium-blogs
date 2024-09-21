@@ -53,6 +53,9 @@ export const signupController = async (c: Context) => {
       success: true,
       jwtToken: jwt,
       message: "User created successfully",
+      userId: user.id,
+      name: user.name,
+      email: user.email,
     });
   } catch (error) {
     c.status(403);
