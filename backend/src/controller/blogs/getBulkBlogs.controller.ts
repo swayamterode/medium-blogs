@@ -7,7 +7,19 @@ export const getBulkBlogs = async (c: Context) => {
   }).$extends(withAccelerate());
 
   try {
-    const posts = await prisma.post.findMany();
+    const posts = await prisma.post.findMany({
+      select: {
+        id: true,
+        title: true,
+        content: true,
+        author: {
+          select: {
+            name: true,
+            email: true,
+          },
+        },
+      },
+    });
     return c.json({ success: true, Posts: posts });
   } catch (error) {
     c.status(403);
